@@ -1,0 +1,15 @@
+# Xử lý dữ liệu
+pandas
+numpy
+scikit-learn
+
+# Mô hình học máy và ANN
+tensorflow
+keras
+
+# Trực quan hóa dữ liệu
+matplotlib
+seaborn
+
+# Hỗ trợ hiển thị notebook (nếu dùng)
+jupyter
