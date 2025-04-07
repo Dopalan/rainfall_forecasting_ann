@@ -57,14 +57,14 @@ Dữ liệu gồm các thuộc tính:
 
 
 -   Chạy thử:
-python src/preprocessing.py
-python src/evaluate.py
-python src/model.py
+    python src/preprocessing.py
+    python src/evaluate.py
+    python src/model.py
     
 -   Chạy dự án
 python main.py
 
 ## ✍️ Tác giả
-Nhóm:
-Thành viên:
-Trường: Đại học Bách Khoa Đại học Quốc gia Thành phố Hồ Chí Minh
+-   Nhóm:
+    Thành viên:
+    Trường: Đại học Bách Khoa Đại học Quốc gia Thành phố Hồ Chí Minh
