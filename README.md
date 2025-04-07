@@ -12,7 +12,7 @@ Dự án này nhằm **dự báo khả năng xảy ra mưa trái mùa** dựa tr
 
 
 ## 📁 Cấu trúc dự án
-
+```
 rainfall_forecasting_ann/
 ├── data/
 │   ├── raw/                         # Dữ liệu gốc (từ Kaggle, CSV, v.v.)
@@ -35,7 +35,7 @@ rainfall_forecasting_ann/
 ├── requirements.txt                # Thư viện Python cần cài
 ├── README.md                       # Giới thiệu dự án, cách chạy
 └── .gitignore                      # Bỏ qua các file không cần (DS_Store, __pycache__)
-
+```
 
 
 ## 📊 Dữ liệu
