@@ -16,7 +16,7 @@ Dự án này nhằm **dự báo khả năng xảy ra mưa trái mùa** dựa tr
 rainfall_forecasting_ann/
 ├── data/
 │   ├── raw/                         # Dữ liệu gốc (từ Kaggle, CSV, v.v.)
-│   └── processed/                   # Dữ liệu đã tiền xử lý (dùng cho mô hình)
+│   └──     /                   # Dữ liệu đã tiền xử lý (dùng cho mô hình)
 │
 ├── notebooks/
 │   └── eda.ipynb                    # Notebook EDA (phân tích dữ liệu ban đầu)
@@ -54,9 +54,17 @@ Dữ liệu gồm các thuộc tính:
     #nếu cần, bổ sung thư viện vào trong requirements.txt
 
 ### 2. Chạy dự án
-    python main.py
 
-✍️ Tác giả
+
+-   Chạy thử:
+python src/preprocessing.py
+python src/evaluate.py
+python src/model.py
+    
+-   Chạy dự án
+python main.py
+
+## ✍️ Tác giả
 Nhóm:
 Thành viên:
-Trường: 
+Trường: Đại học Bách Khoa Đại học Quốc gia Thành phố Hồ Chí Minh
