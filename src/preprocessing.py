@@ -27,9 +27,11 @@ def load_and_preprocess_data(csv_path='data/raw/weather.csv'):
     # Chia thành 2 nhóm: có mưa và không mưa, >= 2mm là có mưa
     def categorize_rainfall(rainfall):
         if rainfall >= 2:
-            return 'Mưa '
+            return 1
         else:
-            return 'Không mưa'
+            return 0
+    # Chuyển đổi cột rainfall thành nhãn nhị phân
+    # 'Có mưa' 1, 'Không mưa' 0
         
      # 'Mưa' 1, 'Không mưa' 0
     df['rain_category'] = df['rainfall'].apply(categorize_rainfall)
