@@ -5,10 +5,10 @@ sys.path.append(os.path.abspath(os.path.join(os.getcwd(), '..')))
 from src.preprocessing import load_and_preprocess_data
 import matplotlib.pyplot as plt
 
-def repare_dataset():
+def repare_dataset(data_path: str):
     # Load and preprocess data
-    x_train, x_test, y_train, y_test = load_and_preprocess_data('../data/raw/weather.csv')
-    input_shape = (x_train.shape, y_train.value_counts())
+    x_train, x_test, y_train, y_test = load_and_preprocess_data(data_path)
+    input_shape = x_train.shape
     train_dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train))
     test_dataset = tf.data.Dataset.from_tensor_slices((x_test, y_test))
     
@@ -28,16 +28,17 @@ def repare_dataset():
 def build_model(input_shape):
     # Build a Sequential model
     model = tf.keras.Sequential([
-        tf.keras.layers.Input(shape=input_shape[0]),
+        tf.keras.layers.Input(shape=(input_shape[1],)),
         tf.keras.layers.Dense(64, activation='relu'),
-        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(32, activation='relu'),
+        tf.keras.layers.Dense(16, activation='relu'),
+        tf.keras.layers.Dense(8, activation='relu'),
         tf.keras.layers.Dense(1)
     ])
     
     # Model summary
     model.summary()
     
-    # Compile the model
     # Compile the model
     model.compile(optimizer=tf.keras.optimizers.RMSprop(), 
               loss=tf.keras.losses.BinaryCrossentropy(), 
@@ -47,8 +48,6 @@ def build_model(input_shape):
 
 def train_model(model, train_dataset, test_dataset, epochs=10):
     # Train the model
-    epochs = 10
-
     # Check if GPU is available
     if tf.config.list_physical_devices('GPU'):
         with tf.device('/GPU:0'):
@@ -64,47 +63,3 @@ def train_model(model, train_dataset, test_dataset, epochs=10):
     model.save('rainfall_forecasting_ann_model.keras')
     
     return history
-
-def evaluate_model(history):   
-    # Evaluate the model
-    accuracy = history.history['accuracy']
-    val_accuracy = history.history['val_accuracy']
-
-    loss = history.history['loss']
-    val_loss = history.history['val_loss']
-    
-    epochs = range(1, len(epochs) + 1)    
-
-    plt.figure(figsize=(10, 6))
-    plt.subplot(2, 1, 1)
-    plt.plot(epochs, accuracy, 'b', label='Training accuracy')
-    plt.plot(epochs, val_accuracy, 'r', label='Validation accuracy')
-    plt.ylabel('Accuracy')
-    plt.ylim(0.4, 1)
-    plt.xticks(epochs)
-    plt.title('Training and validation accuracy')
-    plt.legend()
-        
-    plt.subplot(2, 1, 2)
-    plt.plot(epochs, loss, 'b', label='Training loss')
-    plt.plot(epochs, val_loss, 'r', label='Validation loss')
-    plt.ylabel('Loss')
-    plt.ylim(0, 0.7)
-    plt.xticks(epochs)
-    plt.xlabel('Epochs')
-    plt.title('Training and validation loss')
-    plt.legend()
-    plt.show()
-
-if __name__ == "__main__":
-    # Prepare the dataset
-    train_dataset, test_dataset, input_shape = repare_dataset()
-    
-    # Build the model
-    model = build_model(input_shape)
-    
-    # Train the model
-    history = train_model(model, train_dataset, test_dataset, epochs=10)
-    
-    # Evaluate the model
-    evaluate_model(history)

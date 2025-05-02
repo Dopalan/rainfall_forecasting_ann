@@ -73,8 +73,8 @@ if __name__ == "__main__":
     y_train_df = pd.DataFrame(y_train)
     y_test_df = pd.DataFrame(y_test)
 
-    X_train_df.to_csv('data/processed/X_train.csv', index=False)
-    X_test_df.to_csv('data/processed/X_test.csv', index=False)
+    X_train_df.to_csv('data/processed/x_train.csv', index=False)
+    X_test_df.to_csv('data/processed/x_test.csv', index=False)
     y_train_df.to_csv('data/processed/y_train.csv', index=False)
     y_test_df.to_csv('data/processed/y_test.csv', index=False)
     print("X_train shape:", X_train.shape)
