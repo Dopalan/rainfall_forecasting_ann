@@ -9,6 +9,10 @@ def repare_dataset(data_path: str):
     # Load and preprocess data
     x_train, x_test, y_train, y_test = load_and_preprocess_data(data_path)
     input_shape = x_train.shape
+    # One hot encode labels
+    y_train = tf.one_hot(indices=y_train, depth=2)
+    y_test = tf.one_hot(indices=y_test, depth=2)
+    
     train_dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train))
     test_dataset = tf.data.Dataset.from_tensor_slices((x_test, y_test))
     
@@ -33,16 +37,16 @@ def build_model(input_shape):
         tf.keras.layers.Dense(32, activation='relu'),
         tf.keras.layers.Dense(16, activation='relu'),
         tf.keras.layers.Dense(8, activation='relu'),
-        tf.keras.layers.Dense(1)
+        tf.keras.layers.Dense(2, activation='softmax')
     ])
-    
+        
     # Model summary
     model.summary()
-    
+        
     # Compile the model
-    model.compile(optimizer=tf.keras.optimizers.RMSprop(), 
-              loss=tf.keras.losses.BinaryCrossentropy(), 
-              metrics=[tf.keras.metrics.BinaryAccuracy(threshold=0.5)])
+    model.compile(optimizer=tf.keras.optimizers.Adam(), 
+                loss=tf.keras.losses.CategoricalCrossentropy(),
+                metrics=[tf.keras.metrics.CategoricalAccuracy(), tf.keras.metrics.F1Score(threshold=0.5)])
     
     return model
 

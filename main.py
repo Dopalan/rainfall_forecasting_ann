@@ -1,4 +1,4 @@
-from src.evaluate import evaluate_model
+from src.evaluate import evaluate_acc_loss, plot_evaluation
 from src.model import build_model, repare_dataset, train_model
 
 
@@ -16,4 +16,7 @@ if __name__ == "__main__":
     history = train_model(model, train_dataset, test_dataset, epochs=epochs)
     
     # Evaluate the model
-    evaluate_model(history, epochs)
+    accuracy, val_accuracy, loss, val_loss, f1_score, val_f1_score, epochs_count = evaluate_acc_loss(history, epochs)
+    
+    # Plot evaluation
+    plot_evaluation(accuracy, val_accuracy, loss, val_loss, f1_score, val_f1_score, epochs_count)
